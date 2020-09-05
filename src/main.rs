@@ -57,19 +57,21 @@ fn create(info: RustPackage) -> io::Result<()> {
     // name
     writeln!(file, "pkgname='{}-git'", info.package.name)?;
     // version
-    writeln!(file, "pkgver='{}'", info.package.version)?;
+    writeln!(file, "pkgver={}", info.package.version)?;
+    // pkgrel
+    writeln!(file, "pkgrel=1")?;
     // description
     if let Some(ref desc) = info.package.description {
-        writeln!(file, "pkgdesc'{}'", escape(desc))?;
+        writeln!(file, "pkgdesc='{}'", escape(desc))?;
     } else {
         writeln!(
             file,
-            "pkgver='{}'",
+            "pkgdesc='{}'",
             user("You do not have a description set, do you want to enter one?")
         )?
     }
     // architectures supported
-    writeln!(file, "arch=('all')")?;
+    writeln!(file, "arch=('any')")?;
 
     // homepage
     if let Some(ref url) = info.package.homepage {
@@ -115,6 +117,25 @@ fn create(info: RustPackage) -> io::Result<()> {
             user("You don't have a repository set, do you want to enter one?")
         )?
     }
+
+    // build functions
+    writeln!(
+        file,
+        r#"
+build() {{
+   cargo build --release --locked --all-features --target-dir=target
+}}
+
+check() {{
+  cargo test --release --locked --target-dir=target
+}}
+
+package() {{
+  install -Dm 755 target/release/{} -t "${{pkgdir}}/usr/bin"
+}}
+"#,
+        info.package.name
+    )?;
     Ok(())
 }
 
