@@ -98,6 +98,23 @@ fn create(info: RustPackage) -> io::Result<()> {
 
     // makedepends
     writeln!(file, "makedepends=('rust' 'cargo' 'git')")?;
+
+    // source
+    if let Some(ref src) = info.package.repository {
+        writeln!(
+            file,
+            "source=('{}-git::git+{}')",
+            info.package.name,
+            escape(src)
+        )?;
+    } else {
+        writeln!(
+            file,
+            "source=('{}-git::git+{}')",
+            info.package.name,
+            user("You don't have a repository set, do you want to enter one?")
+        )?
+    }
     Ok(())
 }
 
