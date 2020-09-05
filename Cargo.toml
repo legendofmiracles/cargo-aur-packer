@@ -3,6 +3,10 @@ name = "cargo-aur"
 version = "0.1.0"
 authors = ["ur name <legendofmiracles@protonmail.com"]
 edition = "2018"
+description = "A PKGBUILD generator, for rust projects"
+license = "MIT"
+homepage = "github.com/alx365/cargo-aur"
+repository = "github.com/alx365/cargo-aur"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
