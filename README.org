@@ -1,0 +1,27 @@
+A AUR package generator, that generates (duh) aur packages of your rust applications.
+
+Installation:
+`cargo install cargo-makepkg`
+
+Usage:
+Run `cargo makepkg` in the root of your rust application.
+
+If you haven't set the values, in the toml file, cargo-makepkg will ask you some questions, that you have to answer.
+
+This will create a new folder in /target called aur-package with a MAKEPKG file.
+
+You definitly should test this makepkg file with
+```
+cd target/aur-package
+makepkg -si
+```
+And edit it to your needs.
+
+All you now have to do, is push the git repo in that dir, onto the aur.
+
+
+This is basically a fork of this: https://github.com/kstep/cargo-pkgbuild/
+and similar to this:
+https://github.com/fosskers/cargo-aur
+
+The only difference to cargo-pkgbuild is that you don't have to have keep rust installed for it to work and the difference to cargo-aur is, that this isn't a binary package, but a source based one.

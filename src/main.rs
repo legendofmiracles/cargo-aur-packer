@@ -8,14 +8,14 @@ use std::process::Command;
 use toml;
 #[derive(serde_derive::Deserialize, Debug)]
 struct Package {
-    name: String,                //done
-    version: String,             //done
-    description: Option<String>, //done
-    authors: Vec<String>,
-    keywords: Option<Vec<String>>,
-    repository: Option<String>,
-    homepage: Option<String>, //done
-    license: Option<String>,  //done
+    name: String,                  //done
+    version: String,               //done
+    description: Option<String>,   //done
+    authors: Vec<String>,          //done
+    keywords: Option<Vec<String>>, //done
+    repository: Option<String>,    //done
+    homepage: Option<String>,      //done
+    license: Option<String>,       //done
 }
 #[derive(serde_derive::Deserialize, Debug)]
 struct RustPackage {
@@ -48,6 +48,35 @@ fn main() {
     let toml: RustPackage = toml::from_str(&file).unwrap();
     // println!("{:?}", toml);
     create(toml).expect("Something went wrong.");
+    if Command::new("git")
+        .arg("init")
+        .arg("target/aur-package")
+        .output()
+        .is_err()
+    {
+        println!("Couldn't initialize git repo in target/aur-package");
+    }
+    std::env::set_current_dir("target/aur-package/").expect("Failed to cd");
+    let src_info = Command::new("makepkg").arg("--printsrcinfo").output();
+    if src_info.is_ok() {
+        let mut file = fs::File::create(".SRCINFO")
+            .expect("Failed to create to .SRCINFO file. the pkgbuild was already created tho");
+        let output = String::from_utf8(src_info.unwrap().stdout).unwrap();
+        println!("{}", output);
+        writeln!(file, "{}", &output)
+            .expect("Failed to write to .SRCINFO file. the pkgbuild was already created tho");
+    }
+    Command::new("git")
+        .arg("add")
+        .arg("--all")
+        .spawn()
+        .expect("Failed to add all files to git");
+    Command::new("git")
+        .arg("commit")
+        .arg("-am")
+        .arg("First commit with all the files")
+        .spawn()
+        .expect("Failed to commit git");
 }
 
 fn create(info: RustPackage) -> io::Result<()> {
@@ -76,7 +105,7 @@ fn create(info: RustPackage) -> io::Result<()> {
 
     // homepage
     if let Some(ref url) = info.package.homepage {
-        writeln!(file, "url='{}", escape(url))?;
+        writeln!(file, "url='{}'", escape(url))?;
     } else {
         writeln!(
             file,
