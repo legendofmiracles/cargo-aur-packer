@@ -62,7 +62,6 @@ fn main() {
         let mut file = fs::File::create(".SRCINFO")
             .expect("Failed to create to .SRCINFO file. the pkgbuild was already created tho");
         let output = String::from_utf8(src_info.unwrap().stdout).unwrap();
-        println!("{}", output);
         writeln!(file, "{}", &output)
             .expect("Failed to write to .SRCINFO file. the pkgbuild was already created tho");
     }
@@ -71,6 +70,16 @@ fn main() {
         .arg("--all")
         .spawn()
         .expect("Failed to add all files to git");
+
+    if Command::new("rm")
+        .arg("-f")
+        .arg(".git/index.lock")
+        .spawn()
+        .is_err()
+    {
+        println!("Failed to remove lock");
+    }
+
     Command::new("git")
         .arg("commit")
         .arg("-am")
