@@ -46,14 +46,15 @@ fn main() {
         .read_to_string(&mut file)
         .unwrap();
     let toml: RustPackage = toml::from_str(&file).unwrap();
-    println!("{:?}", toml);
-    create(toml);
+    // println!("{:?}", toml);
+    create(toml).expect("Something went wrong.");
 }
 
 fn create(info: RustPackage) -> io::Result<()> {
     fs::create_dir_all("target/aur-package")?;
     let mut file = fs::File::create("target/aur-package/PKGBUILD")?;
     println!("");
+    writeln!(file, "# PKGBUILD created by using cargo-aur")?;
     // name
     writeln!(file, "pkgname='{}-git'", info.package.name)?;
     // version
