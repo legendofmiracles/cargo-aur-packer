@@ -68,23 +68,14 @@ fn main() {
     Command::new("git")
         .arg("add")
         .arg("--all")
-        .spawn()
+        .output()
         .expect("Failed to add all files to git");
-
-    if Command::new("rm")
-        .arg("-f")
-        .arg(".git/index.lock")
-        .spawn()
-        .is_err()
-    {
-        println!("Failed to remove lock");
-    }
 
     Command::new("git")
         .arg("commit")
         .arg("-am")
         .arg("First commit with all the files")
-        .spawn()
+        .output()
         .expect("Failed to commit git");
 }
 
