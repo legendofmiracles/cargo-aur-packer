@@ -1,6 +1,6 @@
 A AUR package generator, that generates (duh) aur packages of your rust applications.
 
-* Installation
+* Installation:
 `cargo install cargo-makepkg`
 
 * Usage:

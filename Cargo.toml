@@ -6,7 +6,7 @@ edition = "2018"
 description = "A PKGBUILD generator, for rust projects"
 license = "MIT"
 homepage = "https://github.com/alx365/cargo-aur"
-repository = "https://tgithub.com/alx365/cargo-aur"
+repository = "https://github.com/alx365/cargo-aur"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

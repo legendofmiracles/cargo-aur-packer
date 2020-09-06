@@ -152,6 +152,11 @@ fn create(info: RustPackage) -> io::Result<()> {
     writeln!(
         file,
         r#"
+pkgver() {{
+ cd "$pkgname"
+ echo "$(grep '^version =' Cargo.toml|head -n1|cut -d\" -f2).$(git rev-list --count HEAD).g$(git rev-parse --short HEAD)" | tr '-' '.'
+}}
+
 build() {{
    cargo build --release --locked --all-features --target-dir=target
 }}
@@ -161,10 +166,10 @@ check() {{
 }}
 
 package() {{
-  install -Dm 755 target/release/{} -t "${{pkgdir}}/usr/bin"
+  install -Dm 755 target/release/{name} -t "${{pkgdir}}/usr/bin"
 }}
 "#,
-        info.package.name
+        name = info.package.name
     )?;
     Ok(())
 }
