@@ -2,13 +2,13 @@ A AUR package generator, that generates (duh) aur packages of your rust applicat
 
 * Installation:
 #+BEGIN_SRC
-cargo install cargo-makepkg`
+cargo install cargo-aur-packer
 #+END_SRC
 
 * Usage:
 Run
 #+BEGIN_SRC
-cargo makepkg
+cargo aur-packer
 #+END_SRC
 in the root of your rust application.
 
@@ -44,7 +44,7 @@ git fetch
 #+END_SRC
 - and then push the git repo
 #+BEGIN_SRC
-git push -u remote origin`
+git push -u remote origin
 #+END_SRC
 More info about that, can be found here: https://wiki.archlinux.org/index.php/AUR_submission_guidelines#Submitting_packages
 
@@ -58,3 +58,5 @@ Other (similar) programs include:
 - https://github.com/wdv4758h/cargo-arch
 
 The only difference to cargo-pkgbuild, cargo-makepkg and cargo-arch is that you don't have to have keep rust installed for it to work and the difference to cargo-aur is, that this isn't a binary package, but a source based one.
+
+Conclusion: their packages suck, while mine doesn't.
