@@ -15,7 +15,9 @@ You definitly should test this makepkg file with
 cd target/aur-package
 makepkg -si
 ```
+
 And edit it to your needs.
+You should, uncomment the last line in package(), if you have a license.
 
 All you now have to do, is push the git repo in that dir, onto the aur.
 You can do that, by doing the following:

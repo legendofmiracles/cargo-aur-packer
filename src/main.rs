@@ -167,6 +167,7 @@ check() {{
 
 package() {{
   install -Dm 755 target/release/{name} -t "${{pkgdir}}/usr/bin"
+  # install -Dm 755 $pkgname/LICENSE "${{pkgdir}}/usr/share/licenses/{name}"
 }}
 "#,
         name = info.package.name
