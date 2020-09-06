@@ -36,7 +36,7 @@ You can do that, by doing the following:
 - add your public ssh key
 - run (replace '<pkgbase>', with the name)
 #+BEGIN_SRC
-git remote add origin ssh://aur@aur.archlinux.org/<pkgbase>.git`
+git remote add origin ssh://aur@aur.archlinux.org/<pkgbase>.git
 #+END_SRC
 - run
 #+BEGIN_SRC
