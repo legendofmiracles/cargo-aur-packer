@@ -4,17 +4,26 @@ A AUR package generator, that generates (duh) aur packages of your rust applicat
 `cargo install cargo-makepkg`
 
 * Usage:
-Run `cargo makepkg` in the root of your rust application.
+Run
+#+BEGIN_SRC
+cargo makepkg
+#+END_SRC
+in the root of your rust application.
 
 If you haven't set the values, in the toml file, cargo-makepkg will ask you some questions, that you have to answer.
 
-This will create a new folder in /target called `aur-package` with a MAKEPKG, and a hidden SRCINFO file.
+This will create a new folder in /target called
+#+BEGIN_SRC
+aur-package
+#+END_SRC
+with a MAKEPKG, and a hidden SRCINFO file.
 
 You definitly should test this makepkg file with
-```
+
+#+BEGIN_SRC
 cd target/aur-package
 makepkg -si
-```
+#+END_SRC
 
 And edit it to your needs.
 You should, uncomment the last line in package(), if you have a license.
@@ -23,15 +32,27 @@ All you now have to do, is push the git repo in that dir, onto the aur.
 You can do that, by doing the following:
 - create a account on the aur
 - add your public ssh key
-- run `git remote add origin ssh://aur@aur.archlinux.org/<pkgbase>.git` (replace '<pkgbase>', with the name)
-- run `git fetch`
-- and then push the git repo `git push -u remote origin`
+- run
+#+BEGIN_SRC
+git remote add origin ssh://aur@aur.archlinux.org/<pkgbase>.git` (replace '<pkgbase>', with the name)
+#+END_SRC
+- run
+#+BEGIN_SRC
+git fetch
+#+END_SRC
+- and then push the git repo
+#+BEGIN_SRC
+git push -u remote origin`
+#+END_SRC
 More info about that, can be found here: https://wiki.archlinux.org/index.php/AUR_submission_guidelines#Submitting_packages
 
 
-* Alternatives
-This is basically a fork of this: https://github.com/kstep/cargo-pkgbuild/
+* Alternatives and differences to those
+This is basically a fork of this: https://github.com/kstep/cargo-pkgbuild/, but there is a major difference, see below.
 and similar to this:
-https://github.com/fosskers/cargo-aur
+https://github.com/fosskers/cargo-aur.
+Other (similar) programs include:
+- https://github.com/brandonio21/cargo-makepkg
+- https://github.com/wdv4758h/cargo-arch
 
-The only difference to cargo-pkgbuild is that you don't have to have keep rust installed for it to work and the difference to cargo-aur is, that this isn't a binary package, but a source based one.
+The only difference to cargo-pkgbuild, cargo-makepkg and cargo-arch is that you don't have to have keep rust installed for it to work and the difference to cargo-aur is, that this isn't a binary package, but a source based one.
