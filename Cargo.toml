@@ -1,5 +1,5 @@
 [package]
-name = "cargo-makepkg"
+name = "cargo-aur-packer"
 version = "0.1.0"
 authors = ["ur name <legendofmiracles@protonmail.com"]
 edition = "2018"
