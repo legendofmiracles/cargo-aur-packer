@@ -1,7 +1,9 @@
 A AUR package generator, that generates (duh) aur packages of your rust applications.
 
 * Installation:
-`cargo install cargo-makepkg`
+#+BEGIN_SRC
+cargo install cargo-makepkg`
+#+END_SRC
 
 * Usage:
 Run
@@ -32,9 +34,9 @@ All you now have to do, is push the git repo in that dir, onto the aur.
 You can do that, by doing the following:
 - create a account on the aur
 - add your public ssh key
-- run
+- run (replace '<pkgbase>', with the name)
 #+BEGIN_SRC
-git remote add origin ssh://aur@aur.archlinux.org/<pkgbase>.git` (replace '<pkgbase>', with the name)
+git remote add origin ssh://aur@aur.archlinux.org/<pkgbase>.git`
 #+END_SRC
 - run
 #+BEGIN_SRC
