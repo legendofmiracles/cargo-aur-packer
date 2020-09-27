@@ -158,14 +158,17 @@ pkgver() {{
 }}
 
 build() {{
+   cd "$pkgname"
    cargo build --release --locked --all-features --target-dir=target
 }}
 
 check() {{
+  cd "$pkgname"
   cargo test --release --locked --target-dir=target
 }}
 
 package() {{
+  cd "$pkgname"
   install -Dm 755 target/release/{name} -t "${{pkgdir}}/usr/bin"
   # install -Dm 755 $pkgname/LICENSE "${{pkgdir}}/usr/share/licenses/{name}"
 }}
