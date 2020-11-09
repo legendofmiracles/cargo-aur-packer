@@ -83,7 +83,7 @@ fn create(info: RustPackage) -> io::Result<()> {
     fs::create_dir_all("target/aur-package")?;
     let mut file = fs::File::create("target/aur-package/PKGBUILD")?;
     println!("");
-    writeln!(file, "# PKGBUILD created by using cargo-aur")?;
+    writeln!(file, "# PKGBUILD created by using cargo-aur-packer")?;
     // name
     writeln!(file, "pkgname='{}-git'", info.package.name)?;
     // version
