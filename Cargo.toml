@@ -1,6 +1,6 @@
 [package]
 name = "cargo-aur-packer"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["ur name <legendofmiracles@protonmail.com"]
 edition = "2018"
 description = "A PKGBUILD generator, for rust projects"
